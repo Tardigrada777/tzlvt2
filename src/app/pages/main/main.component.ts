@@ -1,4 +1,4 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, inject, OnInit } from '@angular/core';
 import { KeyboardComponent } from '../../widgets/keyboard/keyboard.component';
 import { WithdrawalAmountComponent } from '../../widgets/withdrawal-amount/withdrawal-amount.component';
 import { WithdrawalAmountService } from '../../services/withdrawal-amount.service';
@@ -26,24 +26,24 @@ import { StorageService } from '../../services/storage.service';
   templateUrl: './main.component.html',
   styleUrl: './main.component.css',
 })
-export class MainComponent {
+export class MainComponent implements OnInit {
   private withdrawalAmountService = inject(WithdrawalAmountService);
   private balancesService = inject(BalancesService);
   private withdrawalHistoryService = inject(WithdrawalHistoryService);
   private storageService = inject(StorageService);
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.balancesService.load();
     const history =
       this.storageService.read<Withdrawal[]>('withdrawalHistory') ?? [];
     this.withdrawalHistoryService.setTransactions(history);
   }
 
-  withdrawalAmount = computed(() =>
+  readonly withdrawalAmount = computed(() =>
     this.withdrawalAmountService.amountAsString(),
   );
 
-  onKeyClick(key: string | number) {
+  onKeyClick(key: string | number): void {
     if (typeof key === 'string') {
       if (key === '<') {
         this.handleSubtract();
