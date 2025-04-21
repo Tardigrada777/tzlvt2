@@ -5,6 +5,7 @@ import { WithdrawalAmountService } from '../../services/withdrawal-amount.servic
 import { TodayBalanceComponent } from '../../widgets/today-balance/today-balance.component';
 import { PeriodBudgetStatisticsComponent } from '../../widgets/period-budget-statistics/period-budget-statistics.component';
 import { BalancesService } from '../../services/balances.service';
+import { NewDailyBudgetComponent } from '../../widgets/new-daily-budget/new-daily-budget.component';
 
 @Component({
   selector: 'app-main',
@@ -13,6 +14,7 @@ import { BalancesService } from '../../services/balances.service';
     WithdrawalAmountComponent,
     TodayBalanceComponent,
     PeriodBudgetStatisticsComponent,
+    NewDailyBudgetComponent,
   ],
   templateUrl: './main.component.html',
   styleUrl: './main.component.css',
