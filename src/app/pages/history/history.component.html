@@ -1,0 +1,12 @@
+<header class="flex justify-between p-3">
+  <button class="text-white" (click)="location.back()">Back</button>
+  <app-period-budget-statistics />
+</header>
+
+<div class="text-white p-3">
+  @for (item of items(); track item.id) {
+    <hr class="border-stone-50/25" />
+    <p class="text-5xl">{{ item.amount }}</p>
+    <p class="mb-5">{{ item.dateTime }}</p>
+  }
+</div>

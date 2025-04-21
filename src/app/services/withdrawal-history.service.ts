@@ -1,0 +1,42 @@
+import { computed, inject, Injectable, signal } from '@angular/core';
+import { format, isBefore } from 'date-fns';
+import { StorageService } from './storage.service';
+
+export interface Withdrawal {
+  id: string;
+  amount: number;
+  dateTime: Date | string;
+  [key: string]: string | number | Date;
+}
+
+@Injectable({
+  providedIn: 'root',
+})
+export class WithdrawalHistoryService {
+  private transactions = signal<Withdrawal[]>([]);
+
+  private storageService = inject(StorageService);
+
+  historyItems = computed<Withdrawal[]>(() => {
+    return this.transactions()
+      .sort((a, b) => (isBefore(a.dateTime, b.dateTime) ? 1 : -1))
+      .map((transaction) => ({
+        ...transaction,
+        dateTime: format(transaction.dateTime, 'MMM d, HH:mm'),
+      }));
+  });
+
+  push(amount: number): void {
+    const transaction: Withdrawal = {
+      id: crypto.randomUUID(),
+      amount: Math.abs(amount),
+      dateTime: new Date(),
+    };
+    this.transactions.update((prev) => [...prev, transaction]);
+    this.storageService.upsert('withdrawalHistory', this.transactions());
+  }
+
+  setTransactions(transactions: Withdrawal[]) {
+    this.transactions.set(transactions);
+  }
+}

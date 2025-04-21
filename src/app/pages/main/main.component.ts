@@ -6,6 +6,12 @@ import { TodayBalanceComponent } from '../../widgets/today-balance/today-balance
 import { PeriodBudgetStatisticsComponent } from '../../widgets/period-budget-statistics/period-budget-statistics.component';
 import { BalancesService } from '../../services/balances.service';
 import { NewDailyBudgetComponent } from '../../widgets/new-daily-budget/new-daily-budget.component';
+import { RouterLink } from '@angular/router';
+import {
+  Withdrawal,
+  WithdrawalHistoryService,
+} from '../../services/withdrawal-history.service';
+import { StorageService } from '../../services/storage.service';
 
 @Component({
   selector: 'app-main',
@@ -15,6 +21,7 @@ import { NewDailyBudgetComponent } from '../../widgets/new-daily-budget/new-dail
     TodayBalanceComponent,
     PeriodBudgetStatisticsComponent,
     NewDailyBudgetComponent,
+    RouterLink,
   ],
   templateUrl: './main.component.html',
   styleUrl: './main.component.css',
@@ -22,9 +29,14 @@ import { NewDailyBudgetComponent } from '../../widgets/new-daily-budget/new-dail
 export class MainComponent {
   private withdrawalAmountService = inject(WithdrawalAmountService);
   private balancesService = inject(BalancesService);
+  private withdrawalHistoryService = inject(WithdrawalHistoryService);
+  private storageService = inject(StorageService);
 
   ngOnInit() {
     this.balancesService.load();
+    const history =
+      this.storageService.read<Withdrawal[]>('withdrawalHistory') ?? [];
+    this.withdrawalHistoryService.setTransactions(history);
   }
 
   withdrawalAmount = computed(() =>
@@ -36,7 +48,9 @@ export class MainComponent {
       if (key === '<') {
         this.handleSubtract();
       } else if (key === '=') {
-        // TODO: Handle submit key logic here
+        this.withdrawalHistoryService.push(
+          this.withdrawalAmountService.amountAsNumber(),
+        );
         this.handleReset();
       }
       return;

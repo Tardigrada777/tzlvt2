@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
 
-export type StorageValue = string | number | Record<string, unknown>;
+export type StorageValue =
+  | string
+  | number
+  | Record<string, unknown>
+  | Record<string, unknown>[];
 
 @Injectable({
   providedIn: 'root',
@@ -15,7 +19,7 @@ export class StorageService {
     }
   }
 
-  read(key: string): StorageValue | null {
+  read<T>(key: string): T | null {
     const value = localStorage.getItem(key);
     if (value) {
       try {
