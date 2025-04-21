@@ -1,4 +1,10 @@
-import { Component, computed, inject, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  inject,
+  OnInit,
+} from '@angular/core';
 import { KeyboardComponent } from '../../widgets/keyboard/keyboard.component';
 import { WithdrawalAmountComponent } from '../../widgets/withdrawal-amount/withdrawal-amount.component';
 import { WithdrawalAmountService } from '../../services/withdrawal-amount.service';
@@ -15,6 +21,7 @@ import { StorageService } from '../../services/storage.service';
 
 @Component({
   selector: 'app-main',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     KeyboardComponent,
     WithdrawalAmountComponent,

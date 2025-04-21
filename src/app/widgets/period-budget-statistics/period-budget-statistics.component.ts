@@ -1,10 +1,16 @@
-import { Component, computed, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  inject,
+} from '@angular/core';
 import { PeriodBudgetService } from '../../services/period-budget.service';
 import { differenceInCalendarDays } from 'date-fns';
 
 @Component({
   selector: 'app-period-budget-statistics',
   imports: [],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './period-budget-statistics.component.html',
   styleUrl: './period-budget-statistics.component.css',
 })

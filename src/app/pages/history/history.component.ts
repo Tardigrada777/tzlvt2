@@ -1,10 +1,16 @@
-import { Component, computed, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  inject,
+} from '@angular/core';
 import { PeriodBudgetStatisticsComponent } from '../../widgets/period-budget-statistics/period-budget-statistics.component';
 import { WithdrawalHistoryService } from '../../services/withdrawal-history.service';
 import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-history',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [PeriodBudgetStatisticsComponent],
   templateUrl: './history.component.html',
   styleUrl: './history.component.css',

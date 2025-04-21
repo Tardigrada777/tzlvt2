@@ -1,5 +1,5 @@
 import { NgClass } from '@angular/common';
-import { Component, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, output } from '@angular/core';
 
 type KeyboardKey = {
   label: string;
@@ -10,6 +10,7 @@ type KeyboardKey = {
 
 @Component({
   selector: 'app-keyboard',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [],
   templateUrl: './keyboard.component.html',
   styleUrl: './keyboard.component.css',

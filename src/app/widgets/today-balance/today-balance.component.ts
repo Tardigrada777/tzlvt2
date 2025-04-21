@@ -1,9 +1,15 @@
-import { Component, computed, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  inject,
+} from '@angular/core';
 import { DailyBudgetService } from '../../services/daily-budget.service';
 
 @Component({
   selector: 'app-today-balance',
   imports: [],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './today-balance.component.html',
   styleUrl: './today-balance.component.css',
 })
