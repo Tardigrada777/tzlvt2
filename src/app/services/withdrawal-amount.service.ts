@@ -7,17 +7,17 @@ export class WithdrawalAmountService {
   /**
    * The withdrawal amount as a string.
    */
-  private amount = signal<string>('0');
+  private readonly amount = signal<string>('0');
 
   /**
    * The withdrawal amount as a number.
    */
-  amountAsNumber = computed(() => parseFloat(this.amount()));
+  readonly amountAsNumber = computed<number>(() => parseFloat(this.amount()));
 
   /**
    * The withdrawal amount as a formatted string.
    */
-  amountAsString = computed(() => {
+  readonly amountAsString = computed<string>(() => {
     const value = this.amountAsNumber();
     return isNaN(value) ? '0' : value.toString();
   });

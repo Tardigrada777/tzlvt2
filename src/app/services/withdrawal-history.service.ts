@@ -17,7 +17,7 @@ export class WithdrawalHistoryService {
 
   private storageService = inject(StorageService);
 
-  historyItems = computed<Withdrawal[]>(() => {
+  readonly historyItems = computed<Withdrawal[]>(() => {
     return this.transactions()
       .sort((a, b) => (isBefore(a.dateTime, b.dateTime) ? 1 : -1))
       .map((transaction) => ({

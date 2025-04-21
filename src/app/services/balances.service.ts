@@ -14,7 +14,7 @@ export class BalancesService {
   /**
    * Loads the current balance and daily budget from the storage.
    */
-  load() {
+  load(): void {
     // Get the current balance from the storage service
     const currentBalance = this.storageService.read('periodBudget');
 
@@ -34,7 +34,7 @@ export class BalancesService {
    * Subtracts the given amount from the balances.
    * @param amount The amount to subtract from the balance.
    */
-  subtract(amount: number) {
+  subtract(amount: number): void {
     this.dailyBudgetService.addTransaction(amount);
     this.periodBudgetService.addTransaction(amount);
   }
@@ -43,7 +43,7 @@ export class BalancesService {
    * Adds the given amount to the balances.
    * @param amount The amount to add to the balance.
    */
-  add(amount: number) {
+  add(amount: number): void {
     this.dailyBudgetService.addTransaction(amount);
     this.periodBudgetService.addTransaction(amount);
   }
