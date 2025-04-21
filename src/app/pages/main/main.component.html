@@ -1,0 +1,19 @@
+<div class="grid grid-rows-12 gap-2 h-full">
+  <div class="row-span-1">
+    <app-period-budget-statistics />
+  </div>
+
+  <div class="row-span-2">
+    <app-today-balance />
+  </div>
+
+  <div class="row-span-2"></div>
+
+  <div class="row-span-1">
+    <app-withdrawal-amount [amount]="withdrawalAmount()" />
+  </div>
+
+  <div class="row-span-6">
+    <app-keyboard (keyClicked)="onKeyClick($event)" />
+  </div>
+</div>

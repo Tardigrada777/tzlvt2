@@ -1,0 +1,16 @@
+<div class="bg-stone-50 h-full grid grid-rows-4 grid-cols-4">
+  @for (row of keys; track $index) {
+    @for (key of row; track $index) {
+      <button
+        [class.col-span-2]="key.colSpan === 2"
+        [class.row-span-3]="key.rowSpan === 3"
+        [class.bg-yellow-400!]="key.value === '='"
+        [class.bg-gray-200!]="key.value === '<'"
+        class="flex justify-center items-center border-b-1 border-r-1 border-stone-300 bg-stone-50 cursor-pointer transition duration-50 ease-in-out hover:bg-gray-100 active:bg-gray-200 focus:outline-none"
+        (click)="onKeyClick(key)"
+      >
+        {{ key.label }}
+      </button>
+    }
+  }
+</div>
