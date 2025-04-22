@@ -39,6 +39,10 @@ export class MainComponent implements OnInit {
   private withdrawalHistoryService = inject(WithdrawalHistoryService);
   private storageService = inject(StorageService);
 
+  readonly historyHasItems = computed(() =>
+    this.withdrawalHistoryService.hasItems(),
+  );
+
   ngOnInit(): void {
     this.balancesService.load();
     const history =

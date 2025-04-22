@@ -1,12 +1,14 @@
-<header class="flex justify-between p-3">
-  <button class="text-white" (click)="location.back()">Back</button>
-  <app-period-budget-statistics />
-</header>
+<div class="grid grid-rows-14 h-screen">
+  <header class="flex justify-between p-3 row-span-1">
+    <button class="text-white" (click)="location.back()">Back</button>
+    <app-period-budget-statistics />
+  </header>
 
-<div class="text-white p-3">
-  @for (item of items(); track item.id) {
-    <hr class="border-stone-50/25" />
-    <p class="text-5xl">{{ item.amount }}</p>
-    <p class="mb-5">{{ item.dateTime }}</p>
-  }
+  <div class="text-white p-3 overflow-auto row-span-14">
+    @for (item of items(); track item.id) {
+      <hr class="border-stone-50/25" />
+      <p class="text-5xl">{{ item.amount }}</p>
+      <p class="mb-5">{{ item.dateTime }}</p>
+    }
+  </div>
 </div>

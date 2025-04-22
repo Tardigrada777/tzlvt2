@@ -26,6 +26,8 @@ export class WithdrawalHistoryService {
       }));
   });
 
+  readonly hasItems = computed(() => this.transactions().length > 0);
+
   push(amount: number): void {
     const transaction: Withdrawal = {
       id: crypto.randomUUID(),
