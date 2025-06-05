@@ -18,11 +18,13 @@ export class WithdrawalHistoryService {
   private storageService = inject(StorageService);
 
   readonly historyItems = computed<Withdrawal[]>(() => {
-    return this.transactions()
-      .sort((a, b) => (isBefore(a.dateTime, b.dateTime) ? 1 : -1))
+    return [...this.transactions()]
+      .sort((a, b) =>
+        isBefore(new Date(a.dateTime), new Date(b.dateTime)) ? 1 : -1,
+      )
       .map((transaction) => ({
         ...transaction,
-        dateTime: format(transaction.dateTime, 'MMM d, HH:mm'),
+        dateTime: format(new Date(transaction.dateTime), 'MMM d, HH:mm'),
       }));
   });
 
@@ -39,6 +41,11 @@ export class WithdrawalHistoryService {
   }
 
   setTransactions(transactions: Withdrawal[]) {
-    this.transactions.set(transactions);
+    this.transactions.set(
+      transactions.map((t) => ({
+        ...t,
+        dateTime: new Date(t.dateTime),
+      })),
+    );
   }
 }
