@@ -40,8 +40,11 @@ export class WithdrawalAmountService {
    */
   pop(): number {
     const prevAmount = this.amountAsNumber();
-    if (this.amountAsNumber() > 0) {
-      this.amount.update((prev) => prev.slice(0, -1));
+    if (prevAmount > 0) {
+      this.amount.update((prev) => {
+        const next = prev.slice(0, -1);
+        return next.length > 0 ? next : '0';
+      });
       return prevAmount - this.amountAsNumber();
     }
     return 0;

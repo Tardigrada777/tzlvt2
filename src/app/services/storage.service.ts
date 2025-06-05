@@ -14,7 +14,7 @@ export class StorageService {
     try {
       localStorage.setItem(key, JSON.stringify(value));
     } catch (error) {
-      console.error('Error parsing value for key:', key, error);
+      console.error('Error serializing value for key:', key, error);
       return;
     }
   }
