@@ -14,16 +14,16 @@ export class BalancesService {
   /**
    * Loads the current balance and daily budget from the storage.
    */
-  load(): void {
+  async load(): Promise<void> {
     // Get the current balance from the storage service
-    const currentBalance = this.storageService.read('periodBudget');
+    const currentBalance = await this.storageService.read('periodBudget');
 
     if (typeof currentBalance === 'number') {
       this.periodBudgetService.resetTransactions(currentBalance);
     }
 
     // Get the daily budget from the storage service
-    const dailyBudget = this.storageService.read('dailyBudget');
+    const dailyBudget = await this.storageService.read('dailyBudget');
 
     if (typeof dailyBudget === 'number') {
       this.dailyBudgetService.resetTransactions(dailyBudget);

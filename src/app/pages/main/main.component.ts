@@ -43,10 +43,10 @@ export class MainComponent implements OnInit {
     this.withdrawalHistoryService.hasItems(),
   );
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     this.balancesService.load();
     const history =
-      this.storageService.read<Withdrawal[]>('withdrawalHistory') ?? [];
+      (await this.storageService.read<Withdrawal[]>('withdrawalHistory')) ?? [];
     this.withdrawalHistoryService.setTransactions(history);
   }
 
